@@ -13,6 +13,7 @@ import com.example.rafael.api.domain.Cidade;
 import com.example.rafael.api.domain.Cliente;
 import com.example.rafael.api.domain.Endereco;
 import com.example.rafael.api.domain.Estado;
+import com.example.rafael.api.domain.ItemPedido;
 import com.example.rafael.api.domain.Pagamento;
 import com.example.rafael.api.domain.PagamentoComBoleto;
 import com.example.rafael.api.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.example.rafael.api.repositories.CidadeRepository;
 import com.example.rafael.api.repositories.ClienteRepository;
 import com.example.rafael.api.repositories.EnderecoRepository;
 import com.example.rafael.api.repositories.EstadoRepository;
+import com.example.rafael.api.repositories.ItemPedidoRepository;
 import com.example.rafael.api.repositories.PagamentoRepository;
 import com.example.rafael.api.repositories.PedidoRepository;
 import com.example.rafael.api.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class LojaApiApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LojaApiApplication.class, args);		
@@ -129,6 +134,19 @@ public class LojaApiApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgt1, pgt2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2	= new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 }

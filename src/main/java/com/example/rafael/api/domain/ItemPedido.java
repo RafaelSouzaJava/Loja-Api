@@ -32,11 +32,23 @@ public class ItemPedido implements Serializable{
 		this.preco = preco;
 	}
 	
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade; 
+	}
+	
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-		
+	
+	public void setPedido(Pedido pedido) {
+			id.setPedido(pedido);
+	}
+	
+	public void setProduto(Produto prooduto) {
+		id.setProduto(prooduto);
+	}
+	
 	public Produto getProduto() {
 		return id.getProduto();
 	}

@@ -71,12 +71,12 @@
 
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>			
+			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator-annotation-processor</artifactId>			
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
 		</dependency>
 
 		<dependency>
@@ -84,12 +84,24 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		
+	
 	</dependencies>
 
 	<build>

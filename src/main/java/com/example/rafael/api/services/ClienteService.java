@@ -18,9 +18,12 @@ import com.example.rafael.api.domain.Cliente;
 import com.example.rafael.api.domain.Endereco;
 import com.example.rafael.api.domain.dto.ClienteDTO;
 import com.example.rafael.api.domain.dto.ClienteNewDTO;
+import com.example.rafael.api.domain.enums.Perfil;
 import com.example.rafael.api.domain.enums.TipoCliente;
 import com.example.rafael.api.repositories.ClienteRepository;
 import com.example.rafael.api.repositories.EnderecoRepository;
+import com.example.rafael.api.security.UserSS;
+import com.example.rafael.api.services.exceptions.AuthorizationException;
 import com.example.rafael.api.services.exceptions.DataIntegrityException;
 import com.example.rafael.api.services.exceptions.ObjectNotFoundException;
 
@@ -39,6 +42,13 @@ public class ClienteService {
 	@Transactional
 	@Cacheable
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Cliente não encontrato! Id: " + id + ", Tipo: " + Cliente.class.getName()));

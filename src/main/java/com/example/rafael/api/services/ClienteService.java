@@ -101,6 +101,24 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 	
+	public Cliente findByEmail(String email) {
+	UserSS user = UserService.authenticated();
+		
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Cliente obj = clienteRepository.findByEmail(email);
+		if ( obj == null) {
+			throw new ObjectNotFoundException("Email não encontrado! id: " + user.getId()
+			+ ", Tipo: " + Cliente.class.getName());			
+		}
+		return obj;
+		
+	}
+	
+	
+	
 	@Transactional
 	@Cacheable
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {

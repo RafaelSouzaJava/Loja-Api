@@ -223,10 +223,10 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 
-		Cliente cli1 = new Cliente(null, "Maria Silva", "rafael-avalon@hotmail.com", "16403890085", TipoCliente.PESSOAFISICA, pe.encode("123"));
+		Cliente cli1 = new Cliente(null, "Maria Silva", "rafael_avalon@hotmail.com", "16403890085", TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 		
-		Cliente cli2 = new Cliente(null, "Rafael de Souza alves", "rafael-souza4@outlook.com", "06377712065", TipoCliente.PESSOAFISICA, pe.encode(""));
+		Cliente cli2 = new Cliente(null, "Rafael de Souza alves", "rafael-souza4@outlook.com", "06377712065", TipoCliente.PESSOAFISICA, pe.encode("#Alucard&Yukys2?"));
 		cli2.getTelefones().addAll(Arrays.asList("(85) 988106200)", "93838393"));
 		cli2.addPerfil(Perfil.ADMIN);
 
